@@ -30,24 +30,24 @@ The application provides an efficient way to manage payments, account details, a
 
 ---
 
-# Create MongoDB instance 
+## Create MongoDB instance 
 - Add the connection string + "/Payment_App" to the helper.js in the Backend folder . 
 
 
 ---
-# Clone the repository
+### Clone the repository
 ```
 git clone <repository-link>
 ```
 
-# Backend Setup
+### Backend Setup
 ```
 cd Backend
 npm install
 npm run start
 ```
 
-# Frontend Setup (in a separate terminal)
+### Frontend Setup (in a separate terminal)
 ```
 cd Frontend
 npm install
@@ -55,6 +55,6 @@ npm run dev
 ```
 ---
 
-# Contribution
+## Contribution
 **Want to contribute? Great!**
 Feel free to fork the repository and submit a pull request for any enhancements or fixes. Contributions are always welcome!
