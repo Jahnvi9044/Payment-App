@@ -47,7 +47,7 @@ app.post('/signup',async function(req,res){
    const user = await User.findOne({username : req.body.username });
    if(user)
    {
-     return res.status(409).json({msg:"User Already exist,needs to sign up "});
+     return res.status(409).json({msg:"User Already exist,needs to sign in "});
      
    }
    
@@ -106,7 +106,7 @@ app.post('/signin',async function(req,res){
   try {
     const user = await User.findOne({ username: req.body.username });
     if (user === null) {
-        return res.status(409).json({ msg: "User does not exist, needs to sign in" });
+        return res.status(409).json({ msg: "User does not exist, needs to sign up" });
     }
     
 
