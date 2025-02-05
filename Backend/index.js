@@ -62,11 +62,6 @@ app.use('/payment/vi/query', query);
 // /payment/vi/account/transferMoney
 // /payment/vi/account/balance
 
-app.get('/',function(req,res){
-    console.log("Hello");
-    res.json({msg:"Hello"});
- 
-});
 
 app.listen(PORT,()=>{
     dbConnection();
