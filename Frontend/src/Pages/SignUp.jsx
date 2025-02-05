@@ -38,15 +38,40 @@ const SignUp = () => {
                 firstName,
                 confirmPassword
             });
-           localStorage.setItem("token",response.data.token) ;
+
+            
            if(response.status===201)
-            {   alert("Account Created Successfully")
+            {  
+              console.log(response);
+              localStorage.setItem("token",response.data.token) ;
+               alert("Account Created Successfully")
                 navigate(`/dashboard?username=${username}&name=${name}`)
             }
           }
             catch(e)
-            { alert("Er")
-              console.log("Error Occured While signUP"+e)
+            { 
+              if (error.response) {
+              switch (error.response.status) {
+                case 409:
+                  alert(error.response.data.msg);
+                  break;
+                case 411:
+                  alert(error.response.data.msg);
+                  break;
+                case 500:
+                  alert('Internal server error. Please try again later.');
+                  break;
+                default:
+                  alert('An unexpected error occurred.');
+                  break;
+              }
+            } else if (error.request) {
+              // Request was made but no response was received
+              alert('Network error. Please check your connection.');
+            } else {
+              // Something else happened
+              alert('An unexpected error occurred.');
+            }
             }
         }}
          prop={'/signin'}  button={"Submit"}></Button>

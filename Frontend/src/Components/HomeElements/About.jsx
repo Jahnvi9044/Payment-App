@@ -7,7 +7,7 @@ const About = () => {
   return (
  
 
-<div className="bg-white py-12">
+<div className="relative mt-12 bg-white py-12">
   <div className="mx-auto max-w-7xl px-6 lg:px-8">
     <div className="mx-auto max-w-5xl lg:text-center flex flex-col justify-center items-center">
       

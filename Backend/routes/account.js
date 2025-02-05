@@ -1,14 +1,16 @@
+
+
 const express = require('express');
 const app= express();
-const cors = require('cors');
+
 const { authmiddleware } = require('../middleware');
 const { User, Account } = require('../db');
 const mongoose =require('mongoose')
+const cors = require('cors');
 
 app.use(express.json());
-app.use(cors({
-  origin: "http://localhost:5173" // Replace with your frontend URL
-}));
+require('dotenv').config();
+app.use(cors());
 
 app.get('/',function(req,res){
     console.log('Hello account');

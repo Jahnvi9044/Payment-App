@@ -1,7 +1,8 @@
-
-
-const {jwtSecret} = require('./helper');
 const jwt = require('jsonwebtoken');
+require('dotenv').config()
+
+const jwtSecret = process.env.jwtSecret;
+
 
 function authmiddleware(req,res,next){
  

@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 
 const Service = () => {
   return (
-    <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 dark:bg-gray-900">
+    <div className="relative mt-10 py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 dark:bg-gray-900">
       <div className="mx-auto max-w-screen-md text-center mb-8 lg:mb-12">
       <h1 className="lg:text-6xl text-4xl md:text-5xl font-bold tracking-tight text-gray-900 text-center">Services
         <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-blue-800 to-gray-900"> Offered</span>

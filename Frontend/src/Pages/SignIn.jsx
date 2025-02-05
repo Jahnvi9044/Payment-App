@@ -1,55 +1,82 @@
-import React from 'react'
-import Heading from '../Components/Heading'
-import InputBox from '../Components/InputBox'
-import SubHeading from '../Components/SubHeading'
-import Button from '../Components/Button'
-import ButtonWarning from '../Components/ButtonWarring'
-import { useState } from 'react'
-import axios from 'axios'
-import {useNavigate} from 'react-router-dom'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import Heading from '../Components/Heading';
+import InputBox from '../Components/InputBox';
+import SubHeading from '../Components/SubHeading';
+import Button from '../Components/Button';
+import ButtonWarning from '../Components/ButtonWarring';
 
 const SignIn = () => {
-    const [firstName,setFirstName] = useState("");
-    const [lastName,setLastName] = useState("");
-    const [username,setUserName] = useState("");
-    const [password,setpassword] = useState("");
-  
-    const navigate = useNavigate();
-    
-    const name = firstName+" "+lastName;
-    return (
-    <div className="w-full h-screen flex justify-center ">
-    <div className=' w-full md:w-[60%] h-auto bg-blue-200  p-4 sm:p-10 m-auto rounded-sm flex justify-center ' >
-      <div className='w-[300px] sm:w-[350px]  bg-white rounded-md p-3 sm:p-5 flex flex-col items-center '>
-            <Heading heading={"SignIn"}></Heading>
-            <SubHeading subheading={"Enter your credidentials to login to your account"}></SubHeading>
-            <InputBox onChange={(e)=>{setFirstName(e.target.value)}} label={"FirstName"} placeholder={"John"}></InputBox>
-            <InputBox onChange={(e)=>{setLastName(e.target.value)}} label={"LastName"} placeholder={"John"}></InputBox>
-            <InputBox onChange={(e)=>{setUserName(e.target.value)}} label={"Username"} placeholder={"johnmick123"}></InputBox>
-            <InputBox onChange={(e)=>{setpassword(e.target.value)}} label={"Password"} placeholder={""}></InputBox>
-            <Button onClick={async ()=>{
-         
-             const response = await  axios.post('http://localhost:3000/payment/vi/user/signin',{
-                    username,
-                    password
-                })
-                
-                console.log(response)
-                console.log(response.status)
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [username, setUserName] = useState('');
+  const [password, setPassword] = useState('');
 
-                localStorage.setItem("token",response.data.token);
-                if(response.status===201)
-                {
-                    navigate(`/dashboard?username=${username}&name=${name}`)
-                }
-            }}
-         
-            button={"Submit"}></Button>
-            <ButtonWarning to={'/signup'} button={"Do not have account ? SignUp "}></ButtonWarning>
-          </div>
+  const navigate = useNavigate();
+
+  const apiUrl = import.meta.env.VITE_API_URL;
+
+  const signIpUrl = `${apiUrl}/payment/vi/user/signin`;
+
+
+
+
+  const name = `${firstName} ${lastName}`;
+
+  const handleSignIn = async () => {
+    try {
+      const response = await axios.post(signIpUrl, {
+        username,
+        password,
+      });
+        console.log(response);
+      if (response.status === 201) {
+        localStorage.setItem('token', response.data.token);
+        alert('Signed in Successfully');
+        navigate(`/dashboard?username=${username}&name=${name}`);
+      }
+    } catch (error) {
+      if (error.response) {
+        // Server responded with a status outside 2xx
+        switch (error.response.status) {
+          case 409:
+          case 411:
+            alert(error.response.data.msg);
+            break;
+          case 500:
+            alert('Internal server error. Please try again later.');
+            break;
+          default:
+            alert('An unexpected error occurred.');
+            break;
+        }
+      } else if (error.request) {
+        // Request was made but no response was received
+        alert('Network error. Please check your connection.');
+      } else {
+        // Something else happened
+        alert('An unexpected error occurred.');
+      }
+    }
+  };
+
+  return (
+    <div className="relative w-full h-screen flex justify-center">
+      <div className="w-full md:w-[60%] h-auto bg-blue-200 p-4 sm:p-10 m-auto rounded-sm flex justify-center">
+        <div className="w-[300px] sm:w-[350px] bg-white rounded-md p-3 sm:p-5 flex flex-col items-center">
+          <Heading heading="SignIn" />
+          <SubHeading subheading="Enter your credentials to login to your account" />
+          <InputBox onChange={(e) => setFirstName(e.target.value)} label="FirstName" placeholder="John" />
+          <InputBox onChange={(e) => setLastName(e.target.value)} label="LastName" placeholder="Doe" />
+          <InputBox onChange={(e) => setUserName(e.target.value)} label="Username" placeholder="johnmick123" />
+          <InputBox onChange={(e) => setPassword(e.target.value)} label="Password" placeholder="********" />
+          <Button onClick={handleSignIn} button="Submit" />
+          <ButtonWarning to="/signup" button="Do not have an account? Sign Up" />
         </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default SignIn
+export default SignIn;

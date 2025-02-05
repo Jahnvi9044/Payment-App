@@ -33,8 +33,14 @@ function Send(){
    console.log("user: "+user+ " "+"username: "+user.username)
    const name = user.firstName +" "+user.lastName ;  
 
-      
+  
+   console.log("see",import.meta.env.VITE_API_URL);
 
+  
+   const apiUrl = import.meta.env.VITE_API_URL;
+
+   const transfer = `${apiUrl}/payment/vi/account/transfer`;
+   
    console.log(userId);
     return (
         <div className="w-full h-screen border-gray-600 flex justify-center items-center">
@@ -62,7 +68,7 @@ function Send(){
             //5 sec delay 
             try{
          
-            const response = await axios.post('http://localhost:3000/payment/vi/account/transfer',{
+            const response = await axios.post(transfer,{
                 amount,
                 to:userId
             },{

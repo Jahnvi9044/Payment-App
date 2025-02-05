@@ -5,14 +5,26 @@ const mainRouter = require('./routes/index')
 const query = require('./query')
 const {rateLimit} = require('express-rate-limit');
 const cors = require('cors');
-const {dbstring} = require('./helper')
-app.use(cors({
-  origin: "http://localhost:5173" // Replace with your frontend URL
-}));
+
 app.use(express.json());
 
+require('dotenv').config();
+app.use(cors());
+//Allowing all origin
+
+const dbstring = process.env.dbstring;
+if (process.env.NODE_ENV ==='production') {
+  console.log = function () {}; // Disable all console.log statements in production
+}
+else {
+  console.log("Development mode: console logs are enabled.");
+}
 
 
+
+
+console.log(process.env.NODE_ENV);  // Access NODE_ENV
+const PORT = process.env.PORT;
 const limiter = rateLimit({
     windowMs: 1 * 60 * 1000, // 1 minutes
     limit: 30, // each IP can make up to 10 requests per `windowsMs` (1 minutes)
@@ -31,6 +43,7 @@ const  dbConnection = async()=>{
    }
    catch(err)
    { 
+    console.log(dbstring);
     console.log('Counld not Connect to Database, due to '+ err);
 
    }
@@ -55,7 +68,7 @@ app.get('/',function(req,res){
  
 });
 
-app.listen(3000,()=>{
+app.listen(PORT,()=>{
     dbConnection();
-    console.log("Listen at Port: 3000 ");
+    console.log("Listen at Port: ",PORT);
 });

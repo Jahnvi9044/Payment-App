@@ -1,19 +1,23 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
-const cors = require('cors');
+
 const {User, Account} = require('../db');
 const zod = require('zod');
 const jwt = require('jsonwebtoken');
-const {jwtSecret} = require('../helper.js');
+const cors = require('cors');
+
+require('dotenv').config();
+const jwtSecret = process.env.jwtSecret;
 const {authmiddleware}  = require('../middleware.js');
 
 
 const app= express();
-
 app.use(express.json());
-app.use(cors({
-  origin: "http://localhost:5173" // Replace with your frontend URL
-}));
+app.use(cors());
+
+// Allow all origins
+
+   // Replace with your frontend URL
 
 
 const signupSchema = zod.object({
@@ -46,7 +50,8 @@ app.post('/signup',async function(req,res){
 
    const user = await User.findOne({username : req.body.username });
    if(user)
-   {
+   { 
+    console.log("here here")
      return res.status(409).json({msg:"User Already exist,needs to sign in "});
      
    }
@@ -99,13 +104,14 @@ app.post('/signin',async function(req,res){
   const result = signinSchema.safeParse(req.body);
   
   if(!result.success)
-  {
+  {  console.log("here here")
     return res.status(409).json({msg:"Wrong input "});
   }
 
   try {
     const user = await User.findOne({ username: req.body.username });
-    if (user === null) {
+    if (!user) {
+       
         return res.status(409).json({ msg: "User does not exist, needs to sign up" });
     }
     
@@ -125,11 +131,11 @@ app.post('/signin',async function(req,res){
 
         res.status(201).json({ msg: "User Successfully Signed in", token });
     } else {
-        res.status(411).json({ msg: "Incorrect password" });
+        res.status(411).json({ msg: "Incorrect password. Please try again." });
     }
 } catch (err) {
     console.error("Error during signin:", err);
-    res.status(500).json({ msg: "Internal server error" });
+    res.status(500).json({ msg: "Internal server error . Please try again Later." });
 }
 });
 

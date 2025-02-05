@@ -8,10 +8,16 @@ function User(){
 
    const [users,setUsers] = useState([]);
    const [filter,setFilter] = useState("");
-//    console.log(filter);
+
+
+
+   const apiUrl = import.meta.env.VITE_API_URL;
+   const userUrl = `${apiUrl}/payment/vi/user/bulk?filter=`;
+
+
    useEffect(()=>{
     const token = localStorage.getItem("token");
-    axios.get("http://localhost:3000/payment/vi/user/bulk?filter="+filter,
+    axios.get(userUrl+filter,
         {
             headers: {
                 Authorization: `Bearer ${token}`//Adding token for auth check 

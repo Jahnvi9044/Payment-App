@@ -12,7 +12,7 @@ import { Suspense } from 'react'
 import About from './Components/HomeElements/About'
 import ContactUs from './Components/HomeElements/ContactUs'
 import Service from './Components/HomeElements/Service'
-
+import NavBar from './Components/NavBar'
 function App() {
  
 
@@ -33,9 +33,9 @@ function App() {
      
 
 
-      <Route path="/about" element={<About/>}>About</Route>
-      <Route path="/contact" element={<ContactUs/>}>Contact</Route>
-      <Route path="/service" element={<Service/>}>Services</Route>
+      <Route path="/about" element={<><NavBar/><About/></>}>About</Route>
+      <Route path="/contact" element={<><NavBar></NavBar><ContactUs/></>}>Contact</Route>
+      <Route path="/service" element={<><NavBar></NavBar><Service/></>}>Services</Route>
 
       <Route path="*" element={<NotFound/>}>NotFound</Route>
 

@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 
 const MainSection = () => {
   return (
-    <main className="flex flex-1 w-full flex-col items-center justify-center text-center px-4 sm:mt-28 mt-20">
+    <main className=" flex flex-1 w-full flex-col items-center justify-center text-center px-4 sm:mt-28 mt-20">
       <NavLink 
         to="#" 
         target="_blank" 
