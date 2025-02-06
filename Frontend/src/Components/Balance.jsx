@@ -6,11 +6,17 @@ function Balance(){
       
    const  [balance,setBalance] = useState(0) ;
    
+   
+  const apiUrl = import.meta.env.VITE_API_URL;
+
+  const balURL = `${apiUrl}/payment/vi/account/balance`;
+
+
 
    useEffect( ()=>{
    
     
-         axios.get('http://localhost:3000/payment/vi/account/balance',{
+         axios.get(balURL,{
             headers:{
                 Authorization:`Bearer ${localStorage.getItem('token')}`
             }
