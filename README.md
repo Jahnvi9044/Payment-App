@@ -1,10 +1,10 @@
 # Payment App
 
+[![Deployment Status](https://vercel.com/button)](https://payment-app-123.vercel.app/)
 
-[![View](https://payment-app-123.vercel.app/)]
+
 ## _The Ultimate Payment Management Solution_
 
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://payment-app-123.vercel.app/)
 
 The Payment App is a comprehensive platform designed to facilitate seamless payment operations. It incorporates CRUD (Create, Read, Update, Delete) functionalities, making it highly dynamic and user-friendly. The application is powered by a backend with a MongoDB database containing three primary tables:
 
