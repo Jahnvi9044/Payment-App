@@ -1,5 +1,7 @@
 # Payment App
 
+[![Deployment](https://img.shields.io/badge/Deployment-Vercel-brightgreen)](https://payment-app-123.vercel.app/)
+
 [![Deployment Status](https://vercel.com/button)](https://payment-app-123.vercel.app/)
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://payment-app-123.vercel.app/)
 
